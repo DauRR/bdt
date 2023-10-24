@@ -6,6 +6,6 @@ on:
 
 jobs:
   ci:
-    runs-on: windows_latest
+    runs-on: windows-latest
     steps: 
       - run: echo Hello
