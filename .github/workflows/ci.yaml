@@ -1,0 +1,11 @@
+name: CI workflow
+on: 
+  push:
+    branches:
+      - 'cicd/ci'
+
+jobs:
+  ci:
+    runs-on: windows_latest
+    steps: 
+      - run: echo Hello
