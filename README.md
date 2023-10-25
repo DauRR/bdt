@@ -1,1 +1,1 @@
-[![Unit Tests Actions Status](https://github.com/DauRR/bdt/workflows/CI_workflow/badge.svg)](https://github.com/DauRR/bdt/actions)git
+[![CI_workflow Actions Status](https://github.com/DauRR/bdt/workflows/CI_workflow/badge.svg)](https://github.com/DauRR/bdt/actions)
