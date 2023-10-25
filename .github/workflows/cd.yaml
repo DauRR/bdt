@@ -1,0 +1,15 @@
+name: CD_workflow
+on: 
+  push:
+    branches:
+      - 'cicd/cd'
+
+jobs:
+  ci:
+    runs-on: windows-latest
+    env:
+      ssh_key: ${{ secrets.SSH_KEY }}
+    steps: 
+      - uses: actions/checkout@v4
+      - run: echo $ssh_key
+      - run: python hello.py
