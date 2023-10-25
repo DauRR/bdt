@@ -21,7 +21,7 @@ def main():
     test_is_prime()
     test_primes()
     test_checksum()
-    test_pipeline
+    test_pipeline()
 
 if __name__ == '__main__':
     main()

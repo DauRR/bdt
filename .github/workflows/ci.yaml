@@ -8,5 +8,5 @@ jobs:
   ci:
     runs-on: windows-latest
     steps: 
-      - uses: actions/checkout
+      - uses: actions/checkout@v4
       - run: python test_base_program.py
