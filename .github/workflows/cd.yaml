@@ -5,11 +5,12 @@ on:
       - 'cicd/cd'
 
 jobs:
-  ci:
+  cd:
     runs-on: windows-latest
     env:
       ssh_key: ${{ secrets.SSH_KEY }}
     steps: 
       - uses: actions/checkout@v4
-      - run: echo $ssh_key
+      - run: ssh -o StrictHostKeyChecking=no bdb2c2023q4_guest_3@brain-client.bigdatateam.org
+      - run: echo OK
       - run: python hello.py
