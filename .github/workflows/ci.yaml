@@ -8,4 +8,4 @@ jobs:
   ci:
     runs-on: windows-latest
     steps: 
-      - run: echo Hello
+      - run: python test_base_program.py
