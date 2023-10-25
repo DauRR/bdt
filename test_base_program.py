@@ -16,3 +16,12 @@ def test_checksum():
 
 def test_pipeline():
     assert pipeline() == 7785816
+
+def main():
+    test_is_prime()
+    test_primes()
+    test_checksum()
+    test_pipeline
+
+if __name__ == '__main__':
+    main()
