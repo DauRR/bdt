@@ -7,18 +7,19 @@ on:
 jobs:
   cd:
     runs-on: windows-latest
-    steps: 
-      - name: Set environment variables
-      - env:
+    env:
           SSH_KEY: ${{ secrets.SSH_KEY }}
           SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
           SSH_KEY_PATH: ${{ github.workspace }}~/.ssh/id_rsa
+    steps:
       - uses: actions/checkout@v4
       - name: Create SSH key
-      - run: mkdir ~/.ssh/
-      - run: echo "$SSH_KEY" > ~/.ssh/id_rsa
-            echo "SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+        run: mkdir ~/.ssh/
+        run: echo "$SSH_KEY" > ~/.ssh/id_rsa
+      - name: Add file known_hosts
+        run: echo "SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
       # - run: ssh -o StrictHostKeyChecking=no bdb2c2023q4_guest_3@brain-client.bigdatateam.org
-      - run: ssh -i $SSH_KEY_PATH bdb2c2023q4_guest_3@brain-client.bigdatateam.org ls
+      - name: connect to server and run command ls
+        run: ssh -i $SSH_KEY_PATH bdb2c2023q4_guest_3@brain-client.bigdatateam.org ls
       - run: echo OK
       # - run: python hello.py
