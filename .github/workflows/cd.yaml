@@ -10,13 +10,15 @@ jobs:
     env:
           SSH_KEY: ${{ secrets.SSH_KEY }}
           SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
-          SSH_KEY_PATH: ${{ github.workspace }}~/.ssh/id_rsa
+          SSH_KEY_PATH: ${{ github.workspace }}/../id_rsa
     steps:
       - uses: actions/checkout@v4
       - name: Create .ssh folfer
-        run: mkdir ~/.ssh/
+        run: mkdir -p ~/.ssh/
       - name: Create SSH key in .ssh folder
-        run: echo "$SSH_KEY" > ~/.ssh/id_rsa
+        run: echo "$SSH_KEY" > ../id_rsa
+      - name: give permission
+        run: sudo chmod 600 ../id_rsa
       - name: Add file known_hosts
         run: echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
       # - run: ssh -o StrictHostKeyChecking=no bdb2c2023q4_guest_3@brain-client.bigdatateam.org
