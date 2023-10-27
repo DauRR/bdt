@@ -22,7 +22,7 @@ jobs:
       - name: Add file known_hosts
         run: echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
       # - run: ssh -o StrictHostKeyChecking=no bdb2c2023q4_guest_3@brain-client.bigdatateam.org
-      - name: connect to server and run command ls
+      - name: connect to the server, create a folder, create file task41.txt in the folder
         run: ssh -i $SSH_KEY_PATH bdb2c2023q4_guest_3@brain-client.bigdatateam.org "mkdir -p dauren; touch dauren/task41.txt"
       # - run: echo OK
       # - run: python hello.py
