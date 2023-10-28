@@ -11,7 +11,7 @@ jobs:
       SEED: ${{ vars.SEED }}
       SSH_KEY: ${{ secrets.SSH_KEY }}
       SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
-      SSH_KEY_PATH: ${{ github.workspace }}/../id_rsa
+      SSH_KEY_PATH: ${{ github.workspace }}~/.ssh/id_rsa
     steps:
       - uses: actions/checkout@v4
       - name: run python script and save result into variable
