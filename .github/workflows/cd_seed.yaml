@@ -8,7 +8,7 @@ jobs:
   cd_seed:
     runs-on: ubuntu-latest
     env:
-      # SEED: ${{ vars.SEED }}
+  #   SEED: ${{ vars.SEED }}
       SSH_KEY: ${{ secrets.SSH_KEY }}
       SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
       SSH_KEY_PATH: ${{ github.workspace }}/../id_rsa
@@ -18,9 +18,10 @@ jobs:
         run: export BASE_PROGRAM_RESULT=$(python hello.py)
       - name: create SSH key
         run: |
-          mkdir -p ~/.ssh && \
+          mkdir -p ~/.ssh/ && \
           echo "$SSH_KEY" > ../id_rsa && \
-          sudo chmod 0600 ../id_rsa
+          sudo chmod 600 ../id_rsa && \
+          echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
       # - name: Set up Python
       #   uses: actions/setup-python@v4
       #   with:
