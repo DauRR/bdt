@@ -15,13 +15,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: run python script and save result into variable
-        run: export BASE_PROGRAM_RESULT=$(python hello.py)
-      - name: create SSH key
-        run: |
-          mkdir -p ~/.ssh/ && \
-          echo "$SSH_KEY" > ../id_rsa && \
-          sudo chmod 600 ../id_rsa && \
-          echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+        run: export BASE_PROGRAM_RESULT=$(python3 hello.py)
+      - name: check variable value
+        run: echo $BASE_PROGRAM_RESULT
+      # - name: create SSH key
+      #   run: |
+      #     mkdir -p ~/.ssh/ && \
+      #     echo "$SSH_KEY" > ../id_rsa && \
+      #     sudo chmod 600 ../id_rsa && \
+      #     echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
       # - name: Set up Python
       #   uses: actions/setup-python@v4
       #   with:
@@ -29,5 +31,5 @@ jobs:
       # - name: run python script
       #   run: |
       #      export BASE_PROGRAM_RESULT=$(python test.py)
-      - name: save python script's result to the server
-        run: ssh -i $SSH_KEY_PATH bdb2c2023q4_guest_3@brain-client.bigdatateam.org "echo $BASE_PROGRAM_RESULT -> dauren/task42.txt"
+      # - name: save python script's result to the server
+      #   run: ssh -i $SSH_KEY_PATH bdb2c2023q4_guest_3@brain-client.bigdatateam.org "echo $BASE_PROGRAM_RESULT -> dauren/task42.txt"
