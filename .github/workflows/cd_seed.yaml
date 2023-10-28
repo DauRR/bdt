@@ -8,34 +8,20 @@ jobs:
   cd_seed:
     runs-on: ubuntu-latest
     env:
-      # SEED: ${{ vars.SEED }}
+      SEED: ${{ vars.SEED }}
       SSH_KEY: ${{ secrets.SSH_KEY }}
       SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
       SSH_KEY_PATH: ${{ github.workspace }}/../id_rsa
       FILE: ${{ github.workspace }}/hello.py
     steps:
       - uses: actions/checkout@v4
-      # - name: Run a multi-line script
-      #   run: |
-      #     mkdir ../build
-      #     cp -TR . ../build
-      #     tar -cvf deploy.tar ../build/
-      # - name: copy file via ssh password
-      #   uses: appleboy/scp-action@master
-      #   with:
-      #     host: ${{ secrets.SSH_HOST }}
-      #     username: ${{ secrets.SSH_USERNAME }}
-      #     key: ${{ secrets.SSH_KEY }}
-      #     port: 23425
-      #     source: "deploy.tar"
-      #     target: "/dauren"
       - name: create SSH key
         run: |
           mkdir -p ~/.ssh/ && \
           echo "$SSH_KEY" > ../id_rsa && \
           sudo chmod 600 ../id_rsa && \
           echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
-      #
-      - name: save python script's result to the server
-        # run: ssh -i $SSH_KEY_PATH bdb2c2023q4_guest_3@brain-client.bigdatateam.org "echo $BASE_PROGRAM_RESULT -> dauren/task42.txt"
-        run: scp -i $SSH_KEY_PATH $FILE bdb2c2023q4_guest_3@brain-client.bigdatateam.org:./dauren/hello.py
+      - name: save python script to the server
+        run: scp -i $SSH_KEY_PATH $FILE bdb2c2023q4_guest_3@brain-client.bigdatateam.org:./dauren/base_program_modified.py
+      - name: run python sciprt on the server
+        run: ssh -i $SSH_KEY_PATH bdb2c2023q4_guest_3@brain-client.bigdatateam.org "./dauren/python3 base_program_modified.py $SEED > ./dauren/task42.txt"
