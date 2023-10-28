@@ -7,13 +7,18 @@ on:
 jobs:
   cd_seed:
     runs-on: ubuntu-latest
-    env:
+  #   env:
   #   SEED: ${{ vars.SEED }}
-      SSH_KEY: ${{ secrets.SSH_KEY }}
-      SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
-      SSH_KEY_PATH: ${{ github.workspace }}/../id_rsa
+  #     SSH_KEY: ${{ secrets.SSH_KEY }}
+  #     SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+  #     SSH_KEY_PATH: ${{ github.workspace }}/../id_rsa
     steps:
       - uses: actions/checkout@v4
+      - name: Run a multi-line script
+        run: |
+          mkdir ../build
+          cp -TR . ../build
+          tar -cvf deploy.tar ../build/
       - name: copy file via ssh password
         uses: appleboy/scp-action@master
         with:
@@ -21,8 +26,8 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           port: 23425
-          source: "./hello.py"
-          target: "dauren/hello"
+          source: "deploy.tar"
+          target: "/dauren"
       # - name: create SSH key
       #   run: |
       #     mkdir -p ~/.ssh/ && \
