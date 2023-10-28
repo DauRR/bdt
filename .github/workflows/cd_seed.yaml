@@ -8,10 +8,10 @@ jobs:
   cd_seed:
     runs-on: ubuntu-latest
     env:
-      SEED: ${{ vars.SEED }}
+      # SEED: ${{ vars.SEED }}
       SSH_KEY: ${{ secrets.SSH_KEY }}
       SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
-      # SSH_KEY_PATH: ${{ github.workspace }}/../id_rsa
+      SSH_KEY_PATH: ${{ github.workspace }}/../id_rsa
     steps:
       - uses: actions/checkout@v4
       - name: run python script and save result into variable
@@ -19,8 +19,8 @@ jobs:
       - name: create SSH key
         run: |
           mkdir -p ~/.ssh && \
-          echo "$SSH_KEY" > ~/.ssh/id_rsa && \
-          chmod 0600 ~/.ssh/id_rsa
+          echo "$SSH_KEY" > ../id_rsa && \
+          sudo chmod 0600 ../id_rsa
       # - name: Set up Python
       #   uses: actions/setup-python@v4
       #   with:
@@ -29,5 +29,4 @@ jobs:
       #   run: |
       #      export BASE_PROGRAM_RESULT=$(python test.py)
       - name: save python script's result to the server
-        # run: ssh -i $SSH_KEY_PATH bdb2c2023q4_guest_3@brain-client.bigdatateam.org "echo $BASE_PROGRAM_RESULT -> dauren/task42.txt"
-        run: ssh bdb2c2023q4_guest_3@brain-client.bigdatateam.org "echo $BASE_PROGRAM_RESULT -> dauren/task42.txt"
+        run: ssh -i $SSH_KEY_PATH bdb2c2023q4_guest_3@brain-client.bigdatateam.org "echo $BASE_PROGRAM_RESULT -> dauren/task42.txt"
