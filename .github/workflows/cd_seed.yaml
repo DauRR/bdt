@@ -12,6 +12,7 @@ jobs:
       SSH_KEY: ${{ secrets.SSH_KEY }}
       SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
       SSH_KEY_PATH: ${{ github.workspace }}/../id_rsa
+      FILE: ${{ github.workspace }}/hello.py
     steps:
       - uses: actions/checkout@v4
       # - name: Run a multi-line script
@@ -37,4 +38,4 @@ jobs:
       #
       - name: save python script's result to the server
         # run: ssh -i $SSH_KEY_PATH bdb2c2023q4_guest_3@brain-client.bigdatateam.org "echo $BASE_PROGRAM_RESULT -> dauren/task42.txt"
-        run: scp -i $SSH_KEY_PATH ./hello.py bdb2c2023q4_guest_3@brain-client.bigdatateam.org:/dauren/hello.py
+        run: scp -i $SSH_KEY_PATH $FILE bdb2c2023q4_guest_3@brain-client.bigdatateam.org:/dauren/hello.py
