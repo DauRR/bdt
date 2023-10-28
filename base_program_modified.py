@@ -1,5 +1,7 @@
 import random
 import sys
+from typing import List
+
 
 def is_prime(x: int) -> bool:
     delim = 2
@@ -7,7 +9,7 @@ def is_prime(x: int) -> bool:
         delim += 1
     return x == delim
 
-def primes(count: int) -> list[int]:
+def primes(count: int) -> List[int]:
     prime_numbers_list = []
     i = 2
     while len(prime_numbers_list) != count:
@@ -16,7 +18,7 @@ def primes(count: int) -> list[int]:
         i += 1
     return prime_numbers_list
 
-def checksum(x: list[int]) -> int:
+def checksum(x: List[int]) -> int:
     random_seed = int(sys.argv[1])
     random.seed(random_seed)
     random.shuffle(x)
