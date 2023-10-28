@@ -15,14 +15,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: copy file via ssh password
-        uses: appleboy/scp-action@v0.1.4
+        uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           port: 23425
-          source: "hello.py"
-          target: "dauren/"
+          source: "./hello.py"
+          target: "dauren/hello"
       # - name: create SSH key
       #   run: |
       #     mkdir -p ~/.ssh/ && \
