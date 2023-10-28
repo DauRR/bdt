@@ -8,7 +8,7 @@ jobs:
   cd_seed:
     runs-on: ubuntu-latest
     env:
-    SEED: ${{ vars.SEED }}
+      # SEED: ${{ vars.SEED }}
       SSH_KEY: ${{ secrets.SSH_KEY }}
       SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
       SSH_KEY_PATH: ${{ github.workspace }}/../id_rsa
