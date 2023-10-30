@@ -1,0 +1,12 @@
+name: CI_workflow
+on: 
+  push:
+    branches:
+      - 'cicd/ci'
+
+jobs:
+  ci:
+    runs-on: windows-latest
+    steps: 
+      - uses: actions/checkout@v4
+      - run: python test_base_program.py
