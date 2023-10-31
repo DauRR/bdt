@@ -19,7 +19,8 @@ def primes(count: int) -> List[int]:
     return prime_numbers_list
 
 def checksum(x: List[int]) -> int:
-    random_seed = int(sys.argv[1])
+    manual_random_seed = sys.argv[1]
+    random_seed = int(manual_random_seed)
     random.seed(random_seed)
     random.shuffle(x)
     control_sum = 0
